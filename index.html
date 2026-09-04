@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>MaterialSync AI | Login</title>
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            min-height: 100vh;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            padding: 20px;
+
+            background: linear-gradient(
+                135deg,
+                #dcecff,
+                #e8e2f4,
+                #f3dce8
+            );
+        }
+
+        /* LOGIN BOX */
+
+        .login-container {
+            width: 100%;
+            max-width: 420px;
+
+            padding: 40px 45px;
+
+            background: rgba(255, 255, 255, 0.45);
+
+            border-radius: 12px;
+
+            box-shadow: 0 10px 30px rgba(0,0,0,0.12);
+
+            text-align: center;
+
+            position: relative;
+        }
+
+        /* BACK BUTTON */
+
+        .back-btn {
+            position: absolute;
+
+            top: 12px;
+            right: 15px;
+
+            text-decoration: none;
+
+            background: #123456;
+
+            color: white;
+
+            padding: 8px 14px;
+
+            border-radius: 6px;
+
+            font-size: 13px;
+
+            cursor: pointer;
+        }
+
+        .back-btn:hover {
+            background: #1e4f7a;
+        }
+
+        /* TOP LINE */
+
+        .top-line {
+            width: 100%;
+            height: 2px;
+
+            background: rgba(255,255,255,0.8);
+
+            margin-top: 20px;
+            margin-bottom: 35px;
+        }
+
+        /* TITLE */
+
+        h1 {
+            font-size: 34px;
+
+            font-weight: 400;
+
+            letter-spacing: 3px;
+
+            color: #24364b;
+
+            margin-bottom: 10px;
+        }
+
+        .subtitle {
+            font-size: 13px;
+
+            color: #536273;
+
+            margin-bottom: 25px;
+        }
+
+        /* INPUT */
+
+        .input-box {
+            display: flex;
+
+            align-items: center;
+
+            border-bottom: 2px solid #64748b;
+
+            margin: 25px 0;
+        }
+
+        .icon {
+            font-size: 18px;
+
+            margin-right: 12px;
+        }
+
+        .input-box input {
+            width: 100%;
+
+            border: none;
+
+            outline: none;
+
+            background: transparent;
+
+            padding: 12px 0;
+
+            font-size: 15px;
+        }
+
+        /* OPTIONS */
+
+        .options {
+            display: flex;
+
+            justify-content: space-between;
+
+            align-items: center;
+
+            font-size: 13px;
+
+            margin: 15px 0 30px;
+        }
+
+        .remember {
+            display: flex;
+
+            gap: 6px;
+
+            align-items: center;
+        }
+
+        .options a {
+            text-decoration: none;
+
+            color: #123456;
+
+            font-weight: 500;
+        }
+
+        /* LOGIN BUTTON */
+
+        .login-btn {
+            width: 100%;
+
+            padding: 15px;
+
+            border: none;
+
+            background: #123456;
+
+            color: white;
+
+            font-size: 14px;
+
+            font-weight: bold;
+
+            letter-spacing: 2px;
+
+            cursor: pointer;
+
+            transition: 0.3s;
+        }
+
+        .login-btn:hover {
+            background: #1e4f7a;
+        }
+
+        /* MESSAGE */
+
+        #message {
+            margin-top: 15px;
+            font-size: 14px;
+            font-weight: bold;
+        }
+
+        /* REGISTER */
+
+        .register {
+            margin-top: 22px;
+
+            font-size: 13px;
+
+            color: #536273;
+        }
+
+        .register a {
+            color: #123456;
+
+            font-weight: bold;
+
+            text-decoration: none;
+        }
+
+        /* BOTTOM LINE */
+
+        .bottom-line {
+            width: 100%;
+            height: 2px;
+
+            background: rgba(255,255,255,0.8);
+
+            margin-top: 30px;
+        }
+
+        /* PROJECT NAME */
+
+        .project-name {
+            margin-top: 18px;
+
+            font-size: 11px;
+
+            line-height: 1.5;
+
+            color: #536273;
+        }
+
+        /* MOBILE */
+
+        @media(max-width:500px) {
+
+            .login-container {
+                width: 100%;
+                padding: 40px 25px;
+            }
+
+            h1 {
+                font-size: 28px;
+            }
+
+            .options {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 15px;
+            }
+
+        }
+
+    </style>
+</head>
+
+
+<body>
+
+<div class="login-container">
+
+    <!-- BACK BUTTON -->
+
+    <a href="home.html" class="back-btn">
+        ← Back
+    </a>
+
+
+    <div class="top-line"></div>
+
+
+    <h1>User Login</h1>
+
+
+    <p class="subtitle">
+        MaterialSync AI
+    </p>
+
+
+    <!-- LOGIN FORM -->
+
+    <form id="loginForm">
+
+
+        <!-- EMAIL -->
+
+        <div class="input-box">
+
+            <span class="icon">✉</span>
+
+            <input
+                type="email"
+                id="email"
+                placeholder="Email ID"
+                required
+            >
+
+        </div>
+
+
+        <!-- PASSWORD -->
+
+        <div class="input-box">
+
+            <span class="icon">🔒</span>
+
+            <input
+                type="password"
+                id="password"
+                placeholder="Password"
+                required
+            >
+
+        </div>
+
+
+        <!-- REMEMBER / FORGOT -->
+
+        <div class="options">
+
+            <label class="remember">
+
+                <input type="checkbox">
+
+                Remember me
+
+            </label>
+
+
+            <a href="forgot-password.html">
+                Forgot Password?
+            </a>
+
+        </div>
+
+
+        <!-- LOGIN BUTTON -->
+
+        <button
+            type="submit"
+            class="login-btn"
+        >
+            LOGIN
+        </button>
+
+    </form>
+
+
+    <!-- MESSAGE -->
+
+    <p id="message"></p>
+
+
+    <!-- REGISTER -->
+
+    <div class="register">
+
+        New User?
+
+        <a href="register.html">
+            Register
+        </a>
+
+    </div>
+
+
+    <div class="bottom-line"></div>
+
+
+    <div class="project-name">
+
+        <b>SIH26099</b>
+
+        <br>
+
+        AI-Driven Standardization and Harmonization
+        of Material Codes Across CPSEs
+
+    </div>
+
+</div>
+
+
+<script>
+
+    document
+        .getElementById("loginForm")
+        .addEventListener("submit", function(event) {
+
+            /* Prevent page refresh */
+
+            event.preventDefault();
+
+
+            const email =
+                document
+                .getElementById("email")
+                .value
+                .trim();
+
+
+            const password =
+                document
+                .getElementById("password")
+                .value
+                .trim();
+
+
+            const message =
+                document
+                .getElementById("message");
+
+
+            /* Check fields */
+
+            if (email === "" || password === "") {
+
+                message.style.color = "red";
+
+                message.innerText =
+                    "Please enter Email and Password!";
+
+                return;
+            }
+
+
+            /* Login successful */
+
+            message.style.color = "green";
+
+            message.innerText =
+                "Login Successful!";
+
+
+            /* Open Dashboard */
+
+            setTimeout(function() {
+
+                window.location.href =
+                    "dashboard.html";
+
+            }, 500);
+
+        });
+
+</script>
+
+</body>
+</html>
