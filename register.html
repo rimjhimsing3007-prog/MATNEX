@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>MaterialSync AI | Register</title>
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    font-family:Arial, sans-serif;
+    min-height:100vh;
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    background:linear-gradient(
+        135deg,
+        #dcecff,
+        #e8e2f4,
+        #f3dce8
+    );
+}
+
+.register-container{
+    width:430px;
+    padding:35px 45px;
+
+    background:rgba(255,255,255,0.45);
+
+    border-radius:12px;
+
+    box-shadow:0 10px 30px rgba(0,0,0,0.15);
+
+    text-align:center;
+}
+
+.top-line,
+.bottom-line{
+    height:2px;
+    width:100%;
+    background:rgba(255,255,255,0.8);
+}
+
+.top-line{
+    margin-bottom:25px;
+}
+
+.bottom-line{
+    margin-top:25px;
+}
+
+h1{
+    color:#123456;
+    font-size:32px;
+    font-weight:500;
+    letter-spacing:2px;
+
+    margin-bottom:8px;
+}
+
+.subtitle{
+    color:#64748b;
+    font-size:14px;
+    margin-bottom:20px;
+}
+
+.input-box{
+    margin:18px 0;
+}
+
+.input-box input{
+    width:100%;
+
+    padding:13px 5px;
+
+    border:none;
+    border-bottom:2px solid #64748b;
+
+    outline:none;
+
+    background:transparent;
+
+    font-size:15px;
+}
+
+.input-box input:focus{
+    border-bottom:2px solid #123456;
+}
+
+button{
+    width:100%;
+
+    padding:14px;
+
+    margin-top:15px;
+
+    border:none;
+
+    background:#123456;
+
+    color:white;
+
+    font-size:14px;
+
+    font-weight:bold;
+
+    letter-spacing:2px;
+
+    cursor:pointer;
+}
+
+button:hover{
+    background:#1e4f7a;
+}
+
+.login-link{
+    margin-top:20px;
+
+    color:#64748b;
+
+    font-size:14px;
+}
+
+.login-link a{
+    color:#123456;
+
+    font-weight:bold;
+
+    text-decoration:none;
+}
+
+.project-name{
+    margin-top:15px;
+
+    color:#64748b;
+
+    font-size:11px;
+
+    line-height:1.6;
+}
+
+@media(max-width:500px){
+
+    .register-container{
+        width:90%;
+        padding:30px 25px;
+    }
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="register-container">
+
+    <div class="top-line"></div>
+
+    <h1>Create Account</h1>
+
+    <p class="subtitle">
+        Join MaterialSync AI
+    </p>
+
+
+    <form onsubmit="registerUser(event)">
+
+        <!-- FULL NAME -->
+
+        <div class="input-box">
+
+            <input
+                type="text"
+                placeholder="Full Name"
+                required
+            >
+
+        </div>
+
+
+        <!-- EMAIL -->
+
+        <div class="input-box">
+
+            <input
+                type="email"
+                placeholder="Email ID"
+                required
+            >
+
+        </div>
+
+
+        <!-- ORGANIZATION -->
+
+        <div class="input-box">
+
+            <input
+                type="text"
+                placeholder="Organization / CPSE Name"
+                required
+            >
+
+        </div>
+
+
+        <!-- PASSWORD -->
+
+        <div class="input-box">
+
+            <input
+                type="password"
+                placeholder="Create Password"
+                required
+            >
+
+        </div>
+
+
+        <!-- CONFIRM PASSWORD -->
+
+        <div class="input-box">
+
+            <input
+                type="password"
+                id="confirmPassword"
+                placeholder="Confirm Password"
+                required
+            >
+
+        </div>
+
+
+        <button type="submit">
+
+            REGISTER
+
+        </button>
+
+    </form>
+
+
+    <div class="login-link">
+
+        Already have an account?
+
+        <a href="index.html">
+
+            Login Here
+
+        </a>
+
+    </div>
+
+
+    <div class="bottom-line"></div>
+
+
+    <div class="project-name">
+
+        <b>SIH26099</b>
+
+        <br>
+
+        AI-Driven Standardization and Harmonization
+        of Material Codes Across CPSEs
+
+    </div>
+
+</div>
+
+
+<script>
+
+function registerUser(event){
+
+    event.preventDefault();
+
+    alert("Registration Successful!");
+
+    /* Registration ke baad Login Page */
+
+    window.location.href = "index.html";
+
+}
+
+</script>
+
+</body>
+</html>
