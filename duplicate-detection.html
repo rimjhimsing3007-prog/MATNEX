@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Duplicate Detection | AI Harmonization</title>
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+body {
+    display: flex;
+    background: #f4f6f9;
+    color: #333;
+}
+
+/* SIDEBAR */
+
+.sidebar {
+    width: 260px;
+    min-height: 100vh;
+    background: #101b35;
+    padding: 30px 20px;
+    color: white;
+}
+
+.logo {
+    font-size: 25px;
+    font-weight: bold;
+    margin-bottom: 40px;
+}
+
+.menu {
+    list-style: none;
+}
+
+.menu li {
+    padding: 15px;
+    margin: 8px 0;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.menu li:hover,
+.menu li.active {
+    background: #2b3958;
+}
+
+/* MAIN CONTENT */
+
+.main-content {
+    flex: 1;
+    padding: 40px;
+}
+
+.header h1 {
+    font-size: 32px;
+}
+
+.header p {
+    margin-top: 8px;
+    color: #777;
+}
+
+/* SEARCH SECTION */
+
+.search-box {
+    background: white;
+    padding: 25px;
+    margin-top: 30px;
+    border-radius: 15px;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.08);
+}
+
+.search-box input {
+    width: 75%;
+    padding: 14px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-size: 16px;
+}
+
+.search-box button {
+    padding: 14px 22px;
+    margin-left: 10px;
+    border: none;
+    border-radius: 8px;
+    background: #2563eb;
+    color: white;
+    cursor: pointer;
+}
+
+/* RESULTS */
+
+.results {
+    margin-top: 30px;
+}
+
+.result-card {
+    background: white;
+    padding: 22px;
+    margin-top: 15px;
+    border-radius: 12px;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.08);
+}
+
+.materials {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 15px;
+}
+
+.material-box {
+    width: 45%;
+    padding: 15px;
+    background: #f5f7fb;
+    border-radius: 10px;
+}
+
+.match-score {
+    margin-top: 15px;
+    color: #16a34a;
+    font-weight: bold;
+}
+
+/* BUTTONS */
+
+.actions {
+    margin-top: 15px;
+}
+
+.btn {
+    padding: 10px 18px;
+    border: none;
+    border-radius: 7px;
+    cursor: pointer;
+    margin-right: 10px;
+}
+
+.merge {
+    background: #16a34a;
+    color: white;
+}
+
+.ignore {
+    background: #e5e7eb;
+}
+
+/* RESPONSIVE */
+
+@media(max-width: 768px) {
+
+    .sidebar {
+        width: 200px;
+    }
+
+    .main-content {
+        padding: 20px;
+    }
+
+    .materials {
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    .material-box {
+        width: 100%;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<!-- SIDEBAR -->
+
+<div class="sidebar">
+
+<div class="logo">🤖 AI Harmonization</div>
+
+<ul class="menu">
+
+<li onclick="window.location.href='dashboard.html'">
+📊 Dashboard
+</li>
+
+<li onclick="window.location.href='materials.html'">
+📦 Materials
+</li>
+
+<li onclick="window.location.href='ai-matching.html'">
+🤖 AI Matching
+</li>
+
+<li onclick="window.location.href='standardization.html'">
+🔄 Standardization
+</li>
+
+<li class="active">
+🔍 Duplicate Detection
+</li>
+
+<li onclick="window.location.href='approvals.html'">
+📄 Approval Center
+</li>
+
+<li onclick="window.location.href='analytics.html'">
+📊 Analytics
+</li>
+
+<li onclick="window.location.href='standardization.html'">
+⚙️ Settings
+</li>
+
+<li onclick="window.location.href='index.html'">
+🚪 Logout
+</li>
+
+</ul>
+
+</div>
+
+
+<!-- MAIN CONTENT -->
+
+<div class="main-content">
+
+<div class="header">
+
+<h1>🔍 Duplicate Material Detection</h1>
+
+<p>
+AI-powered system to identify duplicate and similar materials across CPSE databases.
+</p>
+
+</div>
+
+
+<!-- SEARCH -->
+
+<div class="search-box">
+
+<h3>Search Material</h3>
+
+<br>
+
+<input
+type="text"
+id="searchInput"
+placeholder="Enter material name or material code..."
+>
+
+<button onclick="searchMaterial()">
+Search
+</button>
+
+</div>
+
+
+<!-- RESULTS -->
+
+<div class="results" id="results">
+
+<h2>Potential Duplicate Materials</h2>
+
+
+<div class="result-card">
+
+<h3>⚠️ Possible Duplicate Detected</h3>
+
+<div class="materials">
+
+<div class="material-box">
+
+<b>Material Code:</b> MAT-001
+
+<br><br>
+
+<b>Name:</b> Steel Gate Valve
+
+<br><br>
+
+<b>CPSE:</b> IOCL
+
+</div>
+
+
+<div class="material-box">
+
+<b>Material Code:</b> MAT-245
+
+<br><br>
+
+<b>Name:</b> Industrial Steel Gate Valve
+
+<br><br>
+
+<b>CPSE:</b> BPCL
+
+</div>
+
+</div>
+
+<div class="match-score">
+AI Similarity Score: 94%
+</div>
+
+
+<div class="actions">
+
+<button class="btn merge" onclick="mergeMaterial()">
+Merge Materials
+</button>
+
+<button class="btn ignore" onclick="ignoreDuplicate()">
+Ignore
+</button>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+
+<script>
+
+function searchMaterial() {
+
+let input =
+document.getElementById("searchInput").value;
+
+if(input === "") {
+
+alert("Please enter a material name or code!");
+
+} else {
+
+alert(
+"AI is analyzing material: " + input
+);
+
+}
+
+}
+
+
+function mergeMaterial() {
+
+alert(
+"Materials marked for harmonization!"
+);
+
+}
+
+
+function ignoreDuplicate() {
+
+alert(
+"Duplicate suggestion ignored."
+);
+
+}
+
+</script>
+
+</body>
+</html>    
