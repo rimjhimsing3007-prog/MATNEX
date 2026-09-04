@@ -1,0 +1,581 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>MaterialSync AI | Home</title>
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background: #f4f7fb;
+            color: #1f2937;
+        }
+
+        /* NAVBAR */
+
+        nav {
+            height: 75px;
+            background: white;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            padding: 0 7%;
+
+            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .logo {
+            font-size: 23px;
+            font-weight: bold;
+            color: #173b6d;
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 28px;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #374151;
+            font-size: 15px;
+            font-weight: 500;
+        }
+
+        .nav-links a:hover {
+            color: #173b6d;
+        }
+
+        .login-btn {
+            background: #173b6d;
+            color: white !important;
+
+            padding: 10px 22px;
+
+            border-radius: 7px;
+
+            transition: 0.3s;
+        }
+
+        .login-btn:hover {
+            background: #0d2a52;
+        }
+
+
+        /* HERO SECTION */
+
+        .hero {
+            min-height: calc(100vh - 75px);
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            padding: 60px 8%;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #eaf2ff,
+                    #f7f9fc
+                );
+        }
+
+        .hero-content {
+            max-width: 900px;
+            text-align: center;
+        }
+
+        .sih-tag {
+            display: inline-block;
+
+            background: #dcecff;
+
+            color: #173b6d;
+
+            padding: 8px 18px;
+
+            border-radius: 20px;
+
+            font-size: 14px;
+            font-weight: bold;
+
+            margin-bottom: 22px;
+        }
+
+        .hero h1 {
+            font-size: 48px;
+
+            line-height: 1.2;
+
+            color: #173b6d;
+
+            margin-bottom: 22px;
+        }
+
+        .hero p {
+            font-size: 18px;
+
+            color: #536273;
+
+            line-height: 1.7;
+
+            max-width: 750px;
+
+            margin: auto;
+
+            margin-bottom: 35px;
+        }
+
+        .hero-buttons {
+            display: flex;
+
+            justify-content: center;
+
+            gap: 15px;
+
+            flex-wrap: wrap;
+        }
+
+        .dashboard-btn {
+            text-decoration: none;
+
+            background: #173b6d;
+
+            color: white;
+
+            padding: 15px 30px;
+
+            border-radius: 8px;
+
+            font-size: 16px;
+
+            font-weight: bold;
+
+            transition: 0.3s;
+        }
+
+        .dashboard-btn:hover {
+            background: #0d2a52;
+
+            transform: translateY(-2px);
+        }
+
+        .learn-btn {
+            text-decoration: none;
+
+            border: 2px solid #173b6d;
+
+            color: #173b6d;
+
+            padding: 13px 28px;
+
+            border-radius: 8px;
+
+            font-weight: bold;
+
+            transition: 0.3s;
+        }
+
+        .learn-btn:hover {
+            background: #173b6d;
+            color: white;
+        }
+
+
+        /* FEATURES */
+
+        .features-section {
+            padding: 80px 8%;
+
+            background: white;
+
+            text-align: center;
+        }
+
+        .section-title {
+            font-size: 34px;
+
+            color: #173b6d;
+
+            margin-bottom: 12px;
+        }
+
+        .section-subtitle {
+            color: #64748b;
+
+            margin-bottom: 45px;
+        }
+
+        .features {
+            display: grid;
+
+            grid-template-columns:
+                repeat(auto-fit, minmax(230px, 1fr));
+
+            gap: 25px;
+
+            max-width: 1100px;
+
+            margin: auto;
+        }
+
+        .feature-card {
+            background: #f8fafc;
+
+            padding: 30px 25px;
+
+            border-radius: 14px;
+
+            box-shadow:
+                0 5px 18px rgba(0, 0, 0, 0.06);
+
+            transition: 0.3s;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-6px);
+        }
+
+        .feature-icon {
+            font-size: 38px;
+
+            margin-bottom: 18px;
+        }
+
+        .feature-card h3 {
+            color: #173b6d;
+
+            margin-bottom: 12px;
+
+            font-size: 19px;
+        }
+
+        .feature-card p {
+            color: #64748b;
+
+            line-height: 1.6;
+
+            font-size: 14px;
+        }
+
+
+        /* ABOUT */
+
+        .about {
+            padding: 80px 8%;
+
+            background: #eef4fb;
+
+            text-align: center;
+        }
+
+        .about-content {
+            max-width: 850px;
+
+            margin: auto;
+        }
+
+        .about p {
+            color: #536273;
+
+            line-height: 1.8;
+
+            font-size: 17px;
+
+            margin-top: 20px;
+        }
+
+
+        /* FOOTER */
+
+        footer {
+            background: #173b6d;
+
+            color: white;
+
+            text-align: center;
+
+            padding: 22px;
+
+            font-size: 13px;
+        }
+
+
+        /* MOBILE */
+
+        @media (max-width: 700px) {
+
+            nav {
+                padding: 0 20px;
+            }
+
+            .nav-links {
+                gap: 12px;
+            }
+
+            .nav-links a:not(.login-btn) {
+                display: none;
+            }
+
+            .hero {
+                padding: 50px 20px;
+            }
+
+            .hero h1 {
+                font-size: 34px;
+            }
+
+            .hero p {
+                font-size: 16px;
+            }
+
+            .dashboard-btn,
+            .learn-btn {
+                width: 100%;
+                max-width: 280px;
+                text-align: center;
+            }
+
+            .section-title {
+                font-size: 28px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+    <!-- NAVBAR -->
+
+    <nav>
+
+        <div class="logo">
+            MaterialSync AI
+        </div>
+
+        <div class="nav-links">
+
+            <a href="#home">
+                Home
+            </a>
+
+            <a href="#features">
+                Features
+            </a>
+
+            <a href="#about">
+                About
+            </a>
+
+            <a href="index.html" class="login-btn">
+                Login
+            </a>
+
+        </div>
+
+    </nav>
+
+
+
+    <!-- HERO SECTION -->
+
+    <section class="hero" id="home">
+
+        <div class="hero-content">
+
+            <div class="sih-tag">
+                SIH26099
+            </div>
+
+            <h1>
+                AI-Driven Standardization and Harmonization of Material Codes Across CPSEs
+            </h1>
+
+            <p>
+                MaterialSync AI is an intelligent platform designed to
+                standardize material codes, identify duplicate materials,
+                improve data consistency, and enable efficient material
+                management across Central Public Sector Enterprises.
+            </p>
+
+            <div class="hero-buttons">
+
+                <!-- LOGIN BUTTON -->
+
+                <a href="index.html" class="dashboard-btn">
+                    LOGIN
+                </a>
+
+                <a href="#features" class="learn-btn">
+                    Explore Features
+                </a>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- FEATURES -->
+
+    <section class="features-section" id="features">
+
+        <h2 class="section-title">
+            Smart Features
+        </h2>
+
+        <p class="section-subtitle">
+            AI-powered tools for unified material management
+        </p>
+
+        <div class="features">
+
+
+            <div class="feature-card">
+
+                <div class="feature-icon">
+                    🤖
+                </div>
+
+                <h3>
+                    AI Matching
+                </h3>
+
+                <p>
+                    Identify similar material descriptions and suggest
+                    accurate matches using AI.
+                </p>
+
+            </div>
+
+
+
+            <div class="feature-card">
+
+                <div class="feature-icon">
+                    🔄
+                </div>
+
+                <h3>
+                    Standardization
+                </h3>
+
+                <p>
+                    Convert different material descriptions into
+                    standardized formats and unified codes.
+                </p>
+
+            </div>
+
+
+
+            <div class="feature-card">
+
+                <div class="feature-icon">
+                    🔍
+                </div>
+
+                <h3>
+                    Duplicate Detection
+                </h3>
+
+                <p>
+                    Detect duplicate material records and improve
+                    material data quality.
+                </p>
+
+            </div>
+
+
+
+            <div class="feature-card">
+
+                <div class="feature-icon">
+                    📊
+                </div>
+
+                <h3>
+                    Analytics
+                </h3>
+
+                <p>
+                    Monitor standardization progress, AI performance,
+                    and material data insights.
+                </p>
+
+            </div>
+
+
+        </div>
+
+    </section>
+
+
+
+    <!-- ABOUT -->
+
+    <section class="about" id="about">
+
+        <div class="about-content">
+
+            <h2 class="section-title">
+                About the Project
+            </h2>
+
+            <p>
+                The project focuses on creating a unified and intelligent
+                system for harmonizing material codes across CPSEs.
+                Using AI-based matching and standardization, MaterialSync AI
+                helps reduce duplication, improve consistency, and support
+                better decision-making.
+            </p>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- FOOTER -->
+
+    <footer>
+
+        © 2026 MaterialSync AI |
+        SIH26099 |
+        AI-Driven Standardization and Harmonization of Material Codes Across CPSEs
+
+    </footer>
+
+
+</body>
+
+</html>
