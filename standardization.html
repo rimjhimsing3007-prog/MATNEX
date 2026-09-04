@@ -1,0 +1,814 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Standardization | MaterialSync AI</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background: #f4f6f9;
+            color: #222;
+        }
+
+        /* SIDEBAR */
+
+        .sidebar {
+            width: 240px;
+            height: 100vh;
+            background: #14213d;
+            color: white;
+            position: fixed;
+            padding: 25px 15px;
+        }
+
+        .logo {
+            font-size: 22px;
+            font-weight: bold;
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .sidebar a {
+            display: block;
+            color: #dcdcdc;
+            text-decoration: none;
+            padding: 14px;
+            margin-bottom: 8px;
+            border-radius: 8px;
+        }
+
+        .sidebar a:hover,
+        .sidebar a.active {
+            background: #ffffff22;
+            color: white;
+        }
+
+        /* MAIN CONTENT */
+
+        .main-content {
+            margin-left: 240px;
+            padding: 30px;
+        }
+
+        .header {
+            margin-bottom: 25px;
+        }
+
+        .header h1 {
+            font-size: 30px;
+            margin-bottom: 8px;
+        }
+
+        .header p {
+            color: #777;
+        }
+
+        /* SEARCH */
+
+        .search-box {
+            background: white;
+            padding: 20px;
+            border-radius: 12px;
+            margin-bottom: 25px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.05);
+        }
+
+        .search-box input {
+            width: 100%;
+            padding: 13px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 15px;
+        }
+
+        /* STANDARDIZATION CARDS */
+
+        .material-card {
+            background: white;
+            padding: 25px;
+            border-radius: 12px;
+            margin-bottom: 20px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.06);
+        }
+
+        .material-card h2 {
+            margin-bottom: 20px;
+            color: #14213d;
+        }
+
+        .comparison {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .box {
+            padding: 20px;
+            border-radius: 10px;
+        }
+
+        .original {
+            background: #f8fafc;
+            border-left: 5px solid #64748b;
+        }
+
+        .suggested {
+            background: #ecfdf5;
+            border-left: 5px solid #16a34a;
+        }
+
+        .box h3 {
+            margin-bottom: 15px;
+        }
+
+        .box p {
+            margin-bottom: 10px;
+        }
+
+        /* SIMILARITY */
+
+        .similarity {
+            margin-top: 20px;
+        }
+
+        .progress-bar {
+            height: 12px;
+            background: #e5e7eb;
+            border-radius: 10px;
+            overflow: hidden;
+            margin-top: 8px;
+        }
+
+        .progress {
+            height: 100%;
+            background: #16a34a;
+        }
+
+        /* BUTTONS */
+
+        .actions {
+            margin-top: 25px;
+            display: flex;
+            gap: 12px;
+        }
+
+        button {
+            border: none;
+            padding: 11px 18px;
+            border-radius: 7px;
+            cursor: pointer;
+            color: white;
+            font-size: 14px;
+        }
+
+        .approve-btn {
+            background: #16a34a;
+        }
+
+        .approve-btn:hover {
+            background: #15803d;
+        }
+
+        .reject-btn {
+            background: #dc2626;
+        }
+
+        .reject-btn:hover {
+            background: #b91c1c;
+        }
+
+        /* STATUS */
+
+        .status {
+            display: inline-block;
+            margin-top: 15px;
+            padding: 7px 14px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: bold;
+        }
+
+        .pending {
+            background: #fef3c7;
+            color: #92400e;
+        }
+
+        .approved {
+            background: #dcfce7;
+            color: #166534;
+        }
+
+        .rejected {
+            background: #fee2e2;
+            color: #991b1b;
+        }
+
+        /* RESPONSIVE */
+
+        @media(max-width: 768px) {
+
+            .sidebar {
+                width: 70px;
+                padding: 20px 8px;
+            }
+
+            .logo {
+                font-size: 0;
+            }
+
+            .logo::after {
+                content: "AI";
+                font-size: 20px;
+            }
+
+            .sidebar a {
+                font-size: 0;
+                text-align: center;
+            }
+
+            .sidebar a::first-letter {
+                font-size: 18px;
+            }
+
+            .main-content {
+                margin-left: 70px;
+                padding: 20px;
+            }
+
+            .comparison {
+                grid-template-columns: 1fr;
+            }
+        }
+
+    </style>
+</head>
+
+
+<body>
+
+    <!-- SIDEBAR -->
+
+    <aside class="sidebar">
+
+        <div class="logo">
+            MaterialSync AI
+        </div>
+
+        <a href="dashboard.html">
+            📊 Dashboard
+        </a>
+
+        <a href="materials.html">
+            📦 Materials
+        </a>
+
+        <a href="ai-matching.html">
+            🤖 AI Matching
+        </a>
+
+        <a href="standardization.html"
+           class="active">
+            🔄 Standardization
+        </a>
+
+        <a href="duplicate-detection.html">
+           🔍 Duplicate Detection
+        </a>
+
+        <a href="approvals.html">
+            ✅ Approvals
+        </a>
+
+        <a href="analytics.html">
+            📈 Analytics
+        </a>
+        <a href="settings.html">
+            ⚙️ Settings
+        </a>
+
+        <a href="index.html">
+            🚪 Logout
+        </a>
+
+    </aside>
+
+
+    <!-- MAIN CONTENT -->
+
+    <main class="main-content">
+
+        <div class="header">
+
+            <h1>
+                🔄 Material Standardization
+            </h1>
+
+            <p>
+                Review AI suggestions and standardize duplicate materials.
+            </p>
+
+        </div>
+
+
+        <!-- SEARCH -->
+
+        <div class="search-box">
+
+            <input
+                type="text"
+                id="searchInput"
+                placeholder="🔍 Search material code or name..."
+                onkeyup="searchMaterials()"
+            >
+
+        </div>
+
+
+        <!-- MATERIAL 1 -->
+
+        <div class="material-card material-item"
+             data-search="MAT-002 2 Inch Gate Valve">
+
+            <h2>
+                📦 MAT-002
+            </h2>
+
+
+            <div class="comparison">
+
+                <!-- ORIGINAL -->
+
+                <div class="box original">
+
+                    <h3>
+                        Original Material
+                    </h3>
+
+                    <p>
+                        <b>Material Name:</b>
+                        2 Inch Gate Valve
+                    </p>
+
+                    <p>
+                        <b>CPSE:</b>
+                        BPCL
+                    </p>
+
+                    <p>
+                        <b>Category:</b>
+                        Valve
+                    </p>
+
+                </div>
+
+
+                <!-- AI SUGGESTION -->
+
+                <div class="box suggested">
+
+                    <h3>
+                        🤖 AI Standardization Suggestion
+                    </h3>
+
+                    <p>
+                        <b>Standardized Name:</b>
+                        Steel Gate Valve 2 Inch
+                    </p>
+
+                    <p>
+                        <b>Standardized Code:</b>
+                        STD-VALVE-001
+                    </p>
+
+                    <p>
+                        <b>Recommended Category:</b>
+                        Valve
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <!-- SIMILARITY -->
+
+            <div class="similarity">
+
+                <b>
+                    AI Similarity Score:
+                    94%
+                </b>
+
+                <div class="progress-bar">
+
+                    <div
+                        class="progress"
+                        style="width:94%">
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- STATUS -->
+
+            <span
+                class="status pending"
+                id="status1">
+
+                Pending Review
+
+            </span>
+
+
+            <!-- BUTTONS -->
+
+            <div class="actions">
+
+                <button
+                    class="approve-btn"
+                    onclick="approveMaterial('status1')">
+
+                    ✅ Approve Standardization
+
+                </button>
+
+
+                <button
+                    class="reject-btn"
+                    onclick="rejectMaterial('status1')">
+
+                    ❌ Reject
+
+                </button>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- MATERIAL 2 -->
+
+        <div class="material-card material-item"
+             data-search="MAT-003 Industrial Steel Valve">
+
+            <h2>
+                📦 MAT-003
+            </h2>
+
+
+            <div class="comparison">
+
+                <div class="box original">
+
+                    <h3>
+                        Original Material
+                    </h3>
+
+                    <p>
+                        <b>Material Name:</b>
+                        Industrial Steel Valve
+                    </p>
+
+                    <p>
+                        <b>CPSE:</b>
+                        ONGC
+                    </p>
+
+                    <p>
+                        <b>Category:</b>
+                        Valve
+                    </p>
+
+                </div>
+
+
+                <div class="box suggested">
+
+                    <h3>
+                        🤖 AI Standardization Suggestion
+                    </h3>
+
+                    <p>
+                        <b>Standardized Name:</b>
+                        Steel Gate Valve
+                    </p>
+
+                    <p>
+                        <b>Standardized Code:</b>
+                        STD-VALVE-002
+                    </p>
+
+                    <p>
+                        <b>Recommended Category:</b>
+                        Valve
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="similarity">
+
+                <b>
+                    AI Similarity Score:
+                    89%
+                </b>
+
+                <div class="progress-bar">
+
+                    <div
+                        class="progress"
+                        style="width:89%">
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <span
+                class="status pending"
+                id="status2">
+
+                Pending Review
+
+            </span>
+
+
+            <div class="actions">
+
+                <button
+                    class="approve-btn"
+                    onclick="approveMaterial('status2')">
+
+                    ✅ Approve Standardization
+
+                </button>
+
+
+                <button
+                    class="reject-btn"
+                    onclick="rejectMaterial('status2')">
+
+                    ❌ Reject
+
+                </button>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- MATERIAL 3 -->
+
+        <div class="material-card material-item"
+             data-search="MAT-005 Copper Pipe">
+
+            <h2>
+                📦 MAT-005
+            </h2>
+
+
+            <div class="comparison">
+
+                <div class="box original">
+
+                    <h3>
+                        Original Material
+                    </h3>
+
+                    <p>
+                        <b>Material Name:</b>
+                        Copper Pipe
+                    </p>
+
+                    <p>
+                        <b>CPSE:</b>
+                        IOCL
+                    </p>
+
+                    <p>
+                        <b>Category:</b>
+                        Pipe
+                    </p>
+
+                </div>
+
+
+                <div class="box suggested">
+
+                    <h3>
+                        🤖 AI Standardization Suggestion
+                    </h3>
+
+                    <p>
+                        <b>Standardized Name:</b>
+                        Industrial Copper Pipe
+                    </p>
+
+                    <p>
+                        <b>Standardized Code:</b>
+                        STD-PIPE-005
+                    </p>
+
+                    <p>
+                        <b>Recommended Category:</b>
+                        Pipe
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="similarity">
+
+                <b>
+                    AI Similarity Score:
+                    87%
+                </b>
+
+                <div class="progress-bar">
+
+                    <div
+                        class="progress"
+                        style="width:87%">
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <span
+                class="status pending"
+                id="status3">
+
+                Pending Review
+
+            </span>
+
+
+            <div class="actions">
+
+                <button
+                    class="approve-btn"
+                    onclick="approveMaterial('status3')">
+
+                    ✅ Approve Standardization
+
+                </button>
+
+
+                <button
+                    class="reject-btn"
+                    onclick="rejectMaterial('status3')">
+
+                    ❌ Reject
+
+                </button>
+
+            </div>
+
+        </div>
+
+    </main>
+
+
+
+    <script>
+
+        /* APPROVE MATERIAL */
+
+    function approveMaterial(code, name, cpse, score) {
+
+    // Create material object
+    const material = {
+        code: code,
+        name: name,
+        cpse: cpse,
+        score: score,
+        status: "Pending"
+    };
+
+    // Get existing approval materials
+    let approvalMaterials =
+        JSON.parse(localStorage.getItem("approvalMaterials")) || [];
+
+    // Check duplicate
+    const alreadyExists = approvalMaterials.some(
+        item => item.code === code
+    );
+
+    if (!alreadyExists) {
+        approvalMaterials.push(material);
+
+        localStorage.setItem(
+            "approvalMaterials",
+            JSON.stringify(approvalMaterials)
+        );
+    }
+
+    alert("Material sent to Approval Center!");
+
+    // Open approvals page
+    window.location.href = "approvals.html";
+}
+
+</script>
+
+
+        /* REJECT MATERIAL */
+
+        function rejectMaterial(statusId) {
+
+            const status =
+                document.getElementById(statusId);
+
+            status.innerText =
+                "Rejected";
+
+            status.className =
+                "status rejected";
+
+            alert(
+                "Material standardization rejected!"
+            );
+
+        }
+
+
+        /* SEARCH MATERIALS */
+
+        function searchMaterials() {
+
+            const search =
+                document
+                .getElementById("searchInput")
+                .value
+                .toLowerCase();
+
+
+            const materials =
+                document
+                .getElementsByClassName(
+                    "material-item"
+                );
+
+
+            for (
+                let i = 0;
+                i < materials.length;
+                i++
+            ) {
+
+                const text =
+                    materials[i]
+                    .getAttribute(
+                        "data-search"
+                    )
+                    .toLowerCase();
+
+
+                if (
+                    text.includes(search)
+                ) {
+
+                    materials[i]
+                    .style.display =
+                    "block";
+
+                }
+
+                else {
+
+                    materials[i]
+                    .style.display =
+                    "none";
+
+                }
+
+            }
+
+        }
+
+    </script>
+
+</body>
+
+</ht
