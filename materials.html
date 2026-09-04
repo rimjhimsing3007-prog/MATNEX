@@ -1,0 +1,579 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Material Management | MaterialSync AI</title>
+
+    <style>
+        *{
+            margin:0;
+            padding:0;
+            box-sizing:border-box;
+            font-family:Arial, sans-serif;
+        }
+
+        body{
+            background:#f4f7fb;
+            display:flex;
+        }
+
+        /* SIDEBAR */
+
+        .sidebar{
+            width:240px;
+            min-height:100vh;
+            background:#123456;
+            color:white;
+            padding:25px 15px;
+            position:fixed;
+        }
+
+        .logo{
+            font-size:24px;
+            font-weight:bold;
+            text-align:center;
+            margin-bottom:40px;
+        }
+
+        .logo span{
+            color:#8ec5ff;
+        }
+
+        .menu a{
+            display:block;
+            color:white;
+            text-decoration:none;
+            padding:14px 15px;
+            margin:8px 0;
+            border-radius:8px;
+            transition:0.3s;
+        }
+
+        .menu a:hover,
+        .menu a.active{
+            background:#1e4f7a;
+        }
+
+        /* MAIN */
+
+        .main{
+            margin-left:240px;
+            width:calc(100% - 240px);
+            padding:30px;
+        }
+
+        .header{
+            display:flex;
+            justify-content:space-between;
+            align-items:center;
+            margin-bottom:30px;
+        }
+
+        .header h1{
+            color:#123456;
+        }
+
+        .header p{
+            color:#64748b;
+            margin-top:6px;
+        }
+
+        /* CARD */
+
+        .card{
+            background:white;
+            padding:25px;
+            border-radius:12px;
+            box-shadow:0 5px 20px rgba(0,0,0,0.08);
+            margin-bottom:25px;
+        }
+
+        .card h2{
+            color:#123456;
+            margin-bottom:20px;
+        }
+
+        /* FORM */
+
+        .form-grid{
+            display:grid;
+            grid-template-columns:repeat(3, 1fr);
+            gap:15px;
+        }
+
+        input,
+        select{
+            padding:12px;
+            border:1px solid #d1d5db;
+            border-radius:7px;
+            font-size:14px;
+        }
+
+        .btn{
+            background:#123456;
+            color:white;
+            border:none;
+            padding:12px 20px;
+            border-radius:7px;
+            cursor:pointer;
+            font-size:14px;
+        }
+
+        .btn:hover{
+            background:#1e4f7a;
+        }
+
+        /* SEARCH */
+
+        .search-box{
+            width:100%;
+            padding:12px;
+            border:1px solid #d1d5db;
+            border-radius:7px;
+            margin-bottom:20px;
+        }
+
+        /* TABLE */
+
+        table{
+            width:100%;
+            border-collapse:collapse;
+        }
+
+        th{
+            background:#123456;
+            color:white;
+            padding:14px;
+            text-align:left;
+        }
+
+        td{
+            padding:13px;
+            border-bottom:1px solid #e5e7eb;
+        }
+
+        tr:hover{
+            background:#f8fafc;
+        }
+
+        .delete-btn{
+            background:#dc2626;
+            color:white;
+            border:none;
+            padding:7px 12px;
+            border-radius:5px;
+            cursor:pointer;
+        }
+
+        .delete-btn:hover{
+            background:#b91c1c;
+        }
+
+        @media(max-width:900px){
+
+            .form-grid{
+                grid-template-columns:1fr;
+            }
+
+            .sidebar{
+                width:200px;
+            }
+
+            .main{
+                margin-left:200px;
+                width:calc(100% - 200px);
+            }
+        }
+
+        @media(max-width:650px){
+
+            .sidebar{
+                width:70px;
+                padding:15px 8px;
+            }
+
+            .logo{
+                font-size:12px;
+            }
+
+            .menu a{
+                font-size:0;
+                text-align:center;
+            }
+
+            .main{
+                margin-left:70px;
+                width:calc(100% - 70px);
+                padding:15px;
+            }
+
+            .header h1{
+                font-size:22px;
+            }
+
+            table{
+                font-size:12px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- SIDEBAR -->
+
+    <div class="sidebar">
+
+        <div class="logo">
+            Material<span>Sync AI</span>
+        </div>
+
+        <div class="menu">
+
+            <a href="dashboard.html">🏠 Dashboard</a>
+
+            <a href="materials.html" class="active">
+                📦 Materials
+            </a>
+
+            <a href="ai-matching.html">
+                🤖 AI Matching
+            </a>
+
+            <a href="standardization.html">
+                🔄 Standardization
+            </a>
+
+            <a href="duplicate-detection.html">
+                🔍 Duplicate Detection
+            </a>
+
+            <a href="approvals.html">
+                📄 Approvals
+            </a>
+
+            <a href="analytics.html">
+                📊 Analytics
+            </a>
+
+            <a href="settings.html">
+                ⚙️ Settings
+            </a>
+            <a href="index.html">
+                🚪 Logout
+            </a>
+
+        </div>
+
+    </div>
+
+
+    <!-- MAIN CONTENT -->
+
+    <div class="main">
+
+        <div class="header">
+
+            <div>
+                <h1>Material Management</h1>
+
+                <p>
+                    Manage and organize material codes across CPSEs.
+                </p>
+            </div>
+
+        </div>
+
+
+        <!-- ADD MATERIAL -->
+
+        <div class="card">
+
+            <h2>Add New Material</h2>
+
+            <div class="form-grid">
+
+                <input
+                    type="text"
+                    id="materialCode"
+                    placeholder="Material Code"
+                >
+
+                <input
+                    type="text"
+                    id="materialName"
+                    placeholder="Material Name"
+                >
+
+                <select id="category">
+
+                    <option value="">
+                        Select Category
+                    </option>
+
+                    <option>Electrical</option>
+
+                    <option>Mechanical</option>
+
+                    <option>Construction</option>
+
+                    <option>Industrial</option>
+
+                    <option>Other</option>
+
+                </select>
+
+            </div>
+
+            <br>
+
+            <button
+                class="btn"
+                onclick="addMaterial()"
+            >
+                + Add Material
+            </button>
+
+        </div>
+
+
+        <!-- MATERIAL LIST -->
+
+        <div class="card">
+
+            <h2>Material List</h2>
+
+            <input
+                type="text"
+                class="search-box"
+                id="searchInput"
+                placeholder="🔍 Search material..."
+                onkeyup="searchMaterial()"
+            >
+
+
+            <table id="materialTable">
+
+                <thead>
+
+                    <tr>
+
+                        <th>Material Code</th>
+
+                        <th>Material Name</th>
+
+                        <th>Category</th>
+
+                        <th>Action</th>
+
+                    </tr>
+
+                </thead>
+
+
+                <tbody id="materialBody">
+
+                    <tr>
+
+                        <td>MAT001</td>
+
+                        <td>Steel Pipe</td>
+
+                        <td>Industrial</td>
+
+                        <td>
+
+                            <button
+                                class="delete-btn"
+                                onclick="deleteMaterial(this)"
+                            >
+                                Delete
+                            </button>
+
+                        </td>
+
+                    </tr>
+
+
+                    <tr>
+
+                        <td>MAT002</td>
+
+                        <td>Copper Wire</td>
+
+                        <td>Electrical</td>
+
+                        <td>
+
+                            <button
+                                class="delete-btn"
+                                onclick="deleteMaterial(this)"
+                            >
+                                Delete
+                            </button>
+
+                        </td>
+
+                    </tr>
+
+
+                    <tr>
+
+                        <td>MAT003</td>
+
+                        <td>Concrete Cement</td>
+
+                        <td>Construction</td>
+
+                        <td>
+
+                            <button
+                                class="delete-btn"
+                                onclick="deleteMaterial(this)"
+                            >
+                                Delete
+                            </button>
+
+                        </td>
+
+                    </tr>
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </div>
+
+
+
+<script>
+
+/* ADD MATERIAL */
+
+function addMaterial(){
+
+    const code =
+        document.getElementById("materialCode").value.trim();
+
+    const name =
+        document.getElementById("materialName").value.trim();
+
+    const category =
+        document.getElementById("category").value;
+
+
+    if(code === "" || name === "" || category === ""){
+
+        alert("Please fill all fields!");
+
+        return;
+    }
+
+
+    const table =
+        document.getElementById("materialBody");
+
+
+    const row =
+        document.createElement("tr");
+
+
+    row.innerHTML = `
+
+        <td>${code}</td>
+
+        <td>${name}</td>
+
+        <td>${category}</td>
+
+        <td>
+
+            <button
+                class="delete-btn"
+                onclick="deleteMaterial(this)"
+            >
+                Delete
+            </button>
+
+        </td>
+
+    `;
+
+
+    table.appendChild(row);
+
+
+    /* Clear Fields */
+
+    document.getElementById("materialCode").value = "";
+
+    document.getElementById("materialName").value = "";
+
+    document.getElementById("category").value = "";
+
+
+    alert("Material Added Successfully!");
+
+}
+
+
+
+/* DELETE MATERIAL */
+
+function deleteMaterial(button){
+
+    const row = button.parentElement.parentElement;
+
+    row.remove();
+
+}
+
+
+
+/* SEARCH MATERIAL */
+
+function searchMaterial(){
+
+    const input =
+        document.getElementById("searchInput");
+
+    const filter =
+        input.value.toLowerCase();
+
+    const table =
+        document.getElementById("materialBody");
+
+    const rows =
+        table.getElementsByTagName("tr");
+
+
+    for(let i = 0; i < rows.length; i++){
+
+        const text =
+            rows[i].innerText.toLowerCase();
+
+
+        if(text.includes(filter)){
+
+            rows[i].style.display = "";
+
+        }
+
+        else{
+
+            rows[i].style.display = "none";
+
+        }
+
+    }
+
+}
+
+</script>
+
+</body>
+</html>
