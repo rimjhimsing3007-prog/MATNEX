@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Analytics | MaterialSync AI</title>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+body {
+    background: #f4f6f9;
+}
+
+.sidebar {
+    width: 240px;
+    height: 100vh;
+    background: #14213d;
+    color: white;
+    position: fixed;
+    padding: 25px 15px;
+}
+
+.logo {
+    font-size: 22px;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.sidebar a {
+    display: block;
+    color: #dcdcdc;
+    text-decoration: none;
+    padding: 14px;
+    margin-bottom: 8px;
+    border-radius: 8px;
+}
+
+.sidebar a:hover,
+.sidebar a.active {
+    background: #ffffff22;
+    color: white;
+}
+
+.main-content {
+    margin-left: 240px;
+    padding: 30px;
+}
+
+.header {
+    margin-bottom: 25px;
+}
+
+.header h1 {
+    font-size: 28px;
+}
+
+.header p {
+    color: #777;
+    margin-top: 5px;
+}
+
+.charts {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 25px;
+}
+
+.chart-box {
+    background: white;
+    padding: 25px;
+    border-radius: 12px;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.08);
+}
+
+.chart-box h2 {
+    margin-bottom: 20px;
+    font-size: 18px;
+}
+
+.full-chart {
+    grid-column: span 2;
+}
+
+@media(max-width: 800px) {
+    .sidebar {
+        width: 70px;
+    }
+
+    .main-content {
+        margin-left: 70px;
+    }
+
+    .charts {
+        grid-template-columns: 1fr;
+    }
+
+    .full-chart {
+        grid-column: span 1;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<aside class="sidebar">
+
+    <div class="logo">MaterialSync AI</div>
+
+    <a href="dashboard.html">
+        📊 Dashboard
+    </a>
+    <a href="materials.html">
+        📦 Materials
+    </a>
+    <a href="ai-matching.html">
+        🤖 AI Matching
+    </a>
+    <a href="standardization.html">
+        🔄 Standardization
+    </a>
+    <a href="duplicate-detection.html">
+         🔍 Duplicate Detection
+    </a>
+    <a href="approvals.html">
+        ✅ Approvals
+    </a>
+    <a href="analytics.html" class="active">
+        📈 Analytics
+    </a>
+    <a href="settings.html">
+        ⚙️ Settings
+    </a>
+    <a href="index.html">
+        🚪 Logout
+    </a>
+
+</aside>
+
+<main class="main-content">
+
+    <div class="header">
+        <h1>📈 Analytics Dashboard</h1>
+        <p>Graphical representation of material data.</p>
+    </div>
+
+    <div class="charts">
+
+        <div class="chart-box">
+            <h2>Materials by CPSE</h2>
+            <canvas id="cpseChart"></canvas>
+        </div>
+
+        <div class="chart-box">
+            <h2>Material Status</h2>
+            <canvas id="statusChart"></canvas>
+        </div>
+
+        <div class="chart-box full-chart">
+            <h2>Monthly Material Processing</h2>
+            <canvas id="monthlyChart"></canvas>
+        </div>
+
+    </div>
+
+</main>
+
+<script>
+
+/* BAR CHART */
+
+new Chart(document.getElementById("cpseChart"), {
+
+    type: "bar",
+
+    data: {
+
+        labels: ["IOCL", "BPCL", "ONGC", "HPCL"],
+
+        datasets: [{
+
+            label: "Materials",
+
+            data: [320, 280, 250, 190],
+
+            backgroundColor: [
+                "#2563eb",
+                "#16a34a",
+                "#f59e0b",
+                "#7c3aed"
+            ]
+
+        }]
+
+    }
+
+});
+
+
+/* PIE CHART */
+
+new Chart(document.getElementById("statusChart"), {
+
+    type: "pie",
+
+    data: {
+
+        labels: [
+            "Standardized",
+            "Duplicate",
+            "Pending"
+        ],
+
+        datasets: [{
+
+            data: [60, 20, 20],
+
+            backgroundColor: [
+                "#16a34a",
+                "#dc2626",
+                "#f59e0b"
+            ]
+
+        }]
+
+    }
+
+});
+
+
+/* LINE CHART */
+
+new Chart(document.getElementById("monthlyChart"), {
+
+    type: "line",
+
+    data: {
+
+        labels: [
+            "Jan",
+            "Feb",
+            "Mar",
+            "Apr",
+            "May",
+            "Jun"
+        ],
+
+        datasets: [{
+
+            label: "Materials Processed",
+
+            data: [
+                120,
+                180,
+                250,
+                310,
+                390,
+                460
+            ],
+
+            borderColor: "#2563eb",
+
+            backgroundColor: "#2563eb",
+
+            tension: 0.4
+
+        }]
+
+    }
+
+});
+
+</script>
+
+</body>
+</html>
