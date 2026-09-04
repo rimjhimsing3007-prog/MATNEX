@@ -1,0 +1,700 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>AI Matching | MaterialSync AI</title>
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial, sans-serif;
+}
+
+body{
+    background:#f4f7fb;
+    display:flex;
+    color:#24364b;
+}
+
+/* SIDEBAR */
+
+.sidebar{
+    width:240px;
+    min-height:100vh;
+    background:#123456;
+    color:white;
+    padding:25px 15px;
+    position:fixed;
+}
+
+.logo{
+    font-size:24px;
+    font-weight:bold;
+    text-align:center;
+    margin-bottom:40px;
+}
+
+.logo span{
+    color:#8ec5ff;
+}
+
+.menu a{
+    display:block;
+    color:white;
+    text-decoration:none;
+    padding:14px 15px;
+    margin:8px 0;
+    border-radius:8px;
+    transition:0.3s;
+}
+
+.menu a:hover,
+.menu a.active{
+    background:#1e4f7a;
+}
+
+/* MAIN */
+
+.main{
+    margin-left:240px;
+    width:calc(100% - 240px);
+    padding:30px;
+}
+
+.header{
+    margin-bottom:30px;
+}
+
+.header h1{
+    color:#123456;
+    margin-bottom:8px;
+}
+
+.header p{
+    color:#64748b;
+}
+
+/* STATS */
+
+.stats{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:20px;
+    margin-bottom:25px;
+}
+
+.stat-card{
+    background:white;
+    padding:22px;
+    border-radius:12px;
+    box-shadow:0 5px 20px rgba(0,0,0,0.08);
+}
+
+.stat-card p{
+    color:#64748b;
+    font-size:14px;
+}
+
+.stat-card h2{
+    color:#123456;
+    margin-top:8px;
+}
+
+/* CARD */
+
+.card{
+    background:white;
+    padding:25px;
+    border-radius:12px;
+    box-shadow:0 5px 20px rgba(0,0,0,0.08);
+    margin-bottom:25px;
+}
+
+.card h2{
+    color:#123456;
+    margin-bottom:20px;
+}
+
+/* INPUT AREA */
+
+.search-area{
+    display:flex;
+    gap:15px;
+}
+
+.search-area input{
+    flex:1;
+    padding:14px;
+    border:1px solid #d1d5db;
+    border-radius:7px;
+    font-size:15px;
+    outline:none;
+}
+
+.search-area input:focus{
+    border-color:#123456;
+}
+
+.btn{
+    border:none;
+    background:#123456;
+    color:white;
+    padding:14px 22px;
+    border-radius:7px;
+    cursor:pointer;
+    font-weight:bold;
+}
+
+.btn:hover{
+    background:#1e4f7a;
+}
+
+/* LOADING */
+
+.loading{
+    display:none;
+    margin-top:20px;
+    color:#123456;
+    font-weight:bold;
+}
+
+/* RESULTS */
+
+.results{
+    display:none;
+}
+
+.result-card{
+    border:1px solid #e5e7eb;
+    border-radius:10px;
+    padding:20px;
+    margin-bottom:15px;
+}
+
+.result-top{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:15px;
+}
+
+.result-top h3{
+    color:#123456;
+}
+
+.result-top p{
+    color:#64748b;
+    margin-top:6px;
+    font-size:14px;
+}
+
+/* SCORE */
+
+.score{
+    font-weight:bold;
+    padding:8px 14px;
+    border-radius:20px;
+    white-space:nowrap;
+    background:#e0f2fe;
+    color:#0369a1;
+}
+
+/* PROGRESS */
+
+.progress{
+    width:100%;
+    height:9px;
+    background:#e5e7eb;
+    border-radius:20px;
+    margin:15px 0;
+    overflow:hidden;
+}
+
+.progress-bar{
+    height:100%;
+    width:0%;
+    background:#123456;
+    border-radius:20px;
+    transition:width 1s ease;
+}
+
+/* STATUS */
+
+.match-status{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-top:10px;
+}
+
+.high{
+    color:#15803d;
+    font-weight:bold;
+}
+
+.medium{
+    color:#b45309;
+    font-weight:bold;
+}
+
+.low{
+    color:#dc2626;
+    font-weight:bold;
+}
+
+.select-btn{
+    background:#123456;
+    color:white;
+    border:none;
+    padding:9px 15px;
+    border-radius:6px;
+    cursor:pointer;
+}
+
+.select-btn:hover{
+    background:#1e4f7a;
+}
+
+/* MESSAGE */
+
+.message{
+    margin-top:15px;
+    font-weight:bold;
+    color:#15803d;
+}
+
+/* RESPONSIVE */
+
+@media(max-width:900px){
+
+    .stats{
+        grid-template-columns:1fr;
+    }
+
+    .search-area{
+        flex-direction:column;
+    }
+
+}
+
+@media(max-width:700px){
+
+    .sidebar{
+        width:70px;
+        padding:15px 8px;
+    }
+
+    .logo{
+        font-size:11px;
+    }
+
+    .menu a{
+        font-size:0;
+        text-align:center;
+    }
+
+    .main{
+        margin-left:70px;
+        width:calc(100% - 70px);
+        padding:15px;
+    }
+
+}
+
+</style>
+</head>
+
+<body>
+
+<!-- SIDEBAR -->
+
+<div class="sidebar">
+
+    <div class="logo">
+        Material<span>Sync AI</span>
+    </div>
+
+    <div class="menu">
+
+        <a href="dashboard.html">🏠 Dashboard</a>
+
+        <a href="materials.html">📦 Materials</a>
+
+        <a href="ai-matching.html" class="active">
+            🤖 AI Matching
+        </a>
+
+        <a href="standardization.html">🔄 Standardization</a>
+
+        <a href="duplicate-detection.html">
+            🔍 Duplicate Detection
+        </a>
+
+        <a href="approvals.html">
+            📄 Approvals
+        </a>
+
+        <a href="analytics.html">
+            📊 Analytics
+        </a>
+
+        <a href="settings.html">
+            ⚙️ Settings
+        </a>
+        <a href="index.html">
+            🚪 Logout
+        </a>
+
+    </div>
+
+</div>
+
+
+<!-- MAIN -->
+
+<div class="main">
+
+    <div class="header">
+
+        <h1>🤖 AI Material Matching</h1>
+
+        <p>
+            AI-powered similarity analysis for identifying
+            duplicate and similar material records.
+        </p>
+
+    </div>
+
+
+    <!-- STATISTICS -->
+
+    <div class="stats">
+
+        <div class="stat-card">
+            <p>Materials Analyzed</p>
+            <h2 id="analyzedCount">0</h2>
+        </div>
+
+        <div class="stat-card">
+            <p>Best Match Accuracy</p>
+            <h2 id="accuracy">0%</h2>
+        </div>
+
+        <div class="stat-card">
+            <p>Similar Materials Found</p>
+            <h2 id="matchCount">0</h2>
+        </div>
+
+    </div>
+
+
+    <!-- SEARCH -->
+
+    <div class="card">
+
+        <h2>Search Material for AI Matching</h2>
+
+        <div class="search-area">
+
+            <input
+                type="text"
+                id="materialInput"
+                placeholder="Enter material name or code..."
+            >
+
+            <button
+                class="btn"
+                onclick="findMatches()"
+            >
+                🤖 Analyze with AI
+            </button>
+
+        </div>
+
+        <div class="loading" id="loading">
+            🤖 AI is analyzing material similarity...
+        </div>
+
+    </div>
+
+
+    <!-- RESULTS -->
+
+    <div class="card results" id="results">
+
+        <h2>AI Matching Results</h2>
+
+        <!-- RESULT 1 -->
+
+        <div class="result-card">
+
+            <div class="result-top">
+
+                <div>
+
+                    <h3 id="result1Name">
+                        Material Match
+                    </h3>
+
+                    <p>
+                        Material Code: MAT001
+                    </p>
+
+                </div>
+
+                <div class="score">
+                    <span id="score1">96</span>% Match
+                </div>
+
+            </div>
+
+            <div class="progress">
+                <div
+                    class="progress-bar"
+                    id="bar1"
+                ></div>
+            </div>
+
+            <div class="match-status">
+
+                <span class="high">
+                    ● High Confidence
+                </span>
+
+                <button
+                    class="select-btn"
+                    onclick="selectMatch('High Confidence Match')"
+                >
+                    Select Best Match
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <!-- RESULT 2 -->
+
+        <div class="result-card">
+
+            <div class="result-top">
+
+                <div>
+
+                    <h3 id="result2Name">
+                        Similar Material
+                    </h3>
+
+                    <p>
+                        Material Code: MAT014
+                    </p>
+
+                </div>
+
+                <div class="score">
+                    <span id="score2">89</span>% Match
+                </div>
+
+            </div>
+
+            <div class="progress">
+                <div
+                    class="progress-bar"
+                    id="bar2"
+                ></div>
+            </div>
+
+            <div class="match-status">
+
+                <span class="medium">
+                    ● Medium Confidence
+                </span>
+
+                <button
+                    class="select-btn"
+                    onclick="selectMatch('Medium Confidence Match')"
+                >
+                    Select Match
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <!-- RESULT 3 -->
+
+        <div class="result-card">
+
+            <div class="result-top">
+
+                <div>
+
+                    <h3 id="result3Name">
+                        Alternative Material
+                    </h3>
+
+                    <p>
+                        Material Code: MAT027
+                    </p>
+
+                </div>
+
+                <div class="score">
+                    <span id="score3">78</span>% Match
+                </div>
+
+            </div>
+
+            <div class="progress">
+                <div
+                    class="progress-bar"
+                    id="bar3"
+                ></div>
+            </div>
+
+            <div class="match-status">
+
+                <span class="low">
+                    ● Low Confidence
+                </span>
+
+                <button
+                    class="select-btn"
+                    onclick="selectMatch('Alternative Match')"
+                >
+                    Select Match
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<script>
+
+function findMatches(){
+
+    const material =
+        document.getElementById("materialInput")
+        .value
+        .trim();
+
+
+    if(material === ""){
+
+        alert("Please enter a material name or code!");
+
+        return;
+    }
+
+
+    /* SHOW LOADING */
+
+    document.getElementById("loading")
+        .style.display = "block";
+
+
+    document.getElementById("results")
+        .style.display = "none";
+
+
+    /* AI ANALYSIS SIMULATION */
+
+    setTimeout(function(){
+
+        /* Dynamic Names */
+
+        document.getElementById("result1Name")
+            .innerText = material;
+
+        document.getElementById("result2Name")
+            .innerText =
+            material + " - Similar Material";
+
+        document.getElementById("result3Name")
+            .innerText =
+            material + " - Alternative Match";
+
+
+        /* SCORES */
+
+        const score1 = 96;
+        const score2 = 89;
+        const score3 = 78;
+
+
+        document.getElementById("score1")
+            .innerText = score1;
+
+        document.getElementById("score2")
+            .innerText = score2;
+
+        document.getElementById("score3")
+            .innerText = score3;
+
+
+        /* SHOW RESULTS */
+
+        document.getElementById("loading")
+            .style.display = "none";
+
+        document.getElementById("results")
+            .style.display = "block";
+
+
+        /* UPDATE STATS */
+
+        document.getElementById("analyzedCount")
+            .innerText = "1";
+
+        document.getElementById("accuracy")
+            .innerText = score1 + "%";
+
+        document.getElementById("matchCount")
+            .innerText = "3";
+
+
+        /* ANIMATE PROGRESS BARS */
+
+        setTimeout(function(){
+
+            document.getElementById("bar1")
+                .style.width = score1 + "%";
+
+            document.getElementById("bar2")
+                .style.width = score2 + "%";
+
+            document.getElementById("bar3")
+                .style.width = score3 + "%";
+
+        },100);
+
+
+    },1500);
+
+}
+
+
+function selectMatch(match){
+
+    alert(
+        match +
+        " selected successfully!"
+    );
+
+}
+
+</script>
+
+</body>
+</html>
